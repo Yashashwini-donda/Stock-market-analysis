@@ -19,6 +19,19 @@ This project involves analyzing historical stock market data for major e-commerc
      where Column C contains closing prices.
 4. **Visualization**: Construct line charts for stock prices, bar charts for volumes, and use the Data Analysis Toolpak for regression and correlation analysis.
 5. **Metrics Calculation**: Calculate KPIs like volatility, average price, maximum and minimum closing prices.
+### Codes/Formulas for Analysis
+In Excel
+Total Traded Value:
+
+Add a new column: = [@Open] * [@Volume].
+
+Moving Average (50-day):
+
+In a new column, for row 51: =AVERAGE(C2:C51) (if Close is column C). .
+
+Daily Return:
+
+In a new column, starting from row 3: =(C3-C2)/C2 (if Close is column C).
 
 ### Power BI Process
 1. **Data Import**: Load cleaned stock data from Excel files or direct web sources into Power BI.
@@ -26,6 +39,25 @@ This project involves analyzing historical stock market data for major e-commerc
 3. **Key Metrics with DAX**: Example daily return measure:
 4. **Visualization**: Build interactive line charts, volume bar charts, date slicers, and KPI cards.
 5. **Dashboard Creation**: Combine visualizations and metrics into comprehensive dashboards for actionable insights.
+
+###Total Traded Value:
+
+1. Go to Data view > New column
+TotalTraded = [Open] * [Volume]
+2. Moving Average (20-day):
+MA50 = CALCULATE(AVERAGE([Close]), DATESINPERIOD('stk_shop'[01-07-2025], 'stk_shop'[20-07-2025], -20, DAY))
+3. Daily Return:
+Return = ([Close] - CALCULATE(LASTNONBLANK([Close], 1), FILTER('stk_shop', 'stk_shop'[20-07-2025] = EARLIER('stk_shop'[20-07-2025]) - 1))) / CALCULATE(LASTNONBLANK([Close], 1), FILTER('stk_shop', 'stk_shop'[20-07-2025] = EARLIER('stk_shop'[v]) - 1))
+4. Automated Data Import
+Use Excel’s STOCKHISTORY function for historical data:
+5. Relative Strength Index (RSI):
+
+Calculate daily chang
+
+Separate gains/losses, then use:
+
+RSI = 100 - (100 / (1 + (Average Gain / Average Loss)))
+
 
 ## Results
 - Interactive dashboards revealing stock price movements and volume trends.
